@@ -23,20 +23,3 @@ class validateToken {
 }
 
 export default validateToken;
-
-// const routesValidateToken = async (req: Request, res: Response, next: NextFunction) => {
-//   const { authorization } = req.headers;
-
-//   if (!authorization) {
-//     return res.status(401).json({ message: 'Token not found' });
-//   }
-
-//   const verifySing = new (authorization, process.env.JWT_SECRET)();
-
-//   if (verifySing.type === 401) {
-//     return res.status(verifySing.type).json(verifySing.message);
-//   }
-//   next();
-// };
-
-// export default routesValidateToken;

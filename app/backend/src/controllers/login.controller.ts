@@ -15,6 +15,17 @@ class loginController {
     }
     return res.status(type).json(message);
   };
+
+  authToken = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { type, message } = await this.loginService.authToken(authorization as string);
+
+    if (type !== 200) {
+      return res.status(type).json(message);
+    }
+
+    return res.status(type).json({ role: message.role });
+  };
 }
 
 export default loginController;

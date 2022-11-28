@@ -1,4 +1,4 @@
-import { Login } from '../../interfaces/login.interface';
+import { Login } from '../../interfaces/interfaces';
 import schema from './validate.schema';
 
 const loginValidate = (user: Login) => {

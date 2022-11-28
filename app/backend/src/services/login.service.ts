@@ -1,11 +1,13 @@
 import * as bcryptjs from 'bcryptjs';
-import JwtEncoded from '../tokens/generate';
+import { JwtPayload } from 'jsonwebtoken';
+// import { Role } from '../interfaces/interfaces';
+import Authenticator from '../tokens/jwt';
 import User from '../database/models/UsersModel';
 import validate from './schemas/validate.value';
 
 class loginService {
   constructor(
-    private jwt = new JwtEncoded(),
+    private jwt = new Authenticator(),
   ) {}
 
   authLogin = async (email: string, password: string) => {
@@ -31,6 +33,12 @@ class loginService {
     const token = this.jwt.createToken(userWithoutPassword);
 
     return { type: 200, message: { token } };
+  };
+
+  authToken = async (token: string) => {
+    const jwtVerify = this.jwt.verifyToken(token);
+    const { data } = jwtVerify.verify as JwtPayload;
+    return { type: 200, message: data };
   };
 }
 export default loginService;

@@ -14,7 +14,7 @@ class teamsController {
 
   getTeamById = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { type, message } = await this.teamsService.getTeamById(id as string);
+    const { type, message } = await this.teamsService.getTeamById(id);
 
     return res.status(type).json(message);
   };

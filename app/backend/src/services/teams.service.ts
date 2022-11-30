@@ -6,8 +6,8 @@ class teamsService {
     return { type: 200, message: getAll };
   };
 
-  getTeamById = async (id: string) => {
-    const getById = await Team.findOne({ where: { id } });
+  getTeamById = async (id: string | number) => {
+    const getById = await Team.findByPk(id);
     return { type: 200, message: getById };
   };
 }

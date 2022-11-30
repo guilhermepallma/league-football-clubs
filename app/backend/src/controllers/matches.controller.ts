@@ -21,12 +21,12 @@ class matchesController {
     return res.status(code).json(result);
   };
 
-  updateMatchInProgress = async (req: Request, res: Response) => {
+  updateStatusInProgress = async (req: Request, res: Response) => {
     const match = req.body;
     const inProgress = true;
 
-    const { type, message } = await this.matchesService
-      .updateMatchInProgress(match as Match, inProgress as boolean);
+    const { type, message } = await
+    this.matchesService.updateStatusInProgress(match as Match, inProgress as boolean);
 
     return res.status(type).json(message);
   };
@@ -36,8 +36,18 @@ class matchesController {
     const { inProgress } = req.query;
     const query = (inProgress === 'false');
 
-    const { type, message } = await this.matchesService
-      .changeInProgress(query as boolean, Number(id));
+    const { type, message } = await
+    this.matchesService.changeInProgress(query as boolean, Number(id));
+
+    return res.status(type).json(message);
+  };
+
+  updateMatchInProgress = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+
+    const { type, message } = await
+    this.matchesService.updateMatchInProgress(Number(id), homeTeamGoals, awayTeamGoals);
 
     return res.status(type).json(message);
   };

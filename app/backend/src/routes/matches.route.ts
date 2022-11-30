@@ -2,7 +2,6 @@ import { Router } from 'express';
 import MatchValidate from '../middlewares/match.middleware';
 import MatchesController from '../controllers/matches.controller';
 import RoutesValidateToken from '../middlewares/auth.middleware';
-// import matchMiddleware from '../middlewares/match.middleware';
 
 const matchesRoute = Router();
 const matchesController = new MatchesController();
@@ -15,9 +14,11 @@ matchesRoute.post(
   '/',
   authMiddleware.routeValidateToken,
   matchMiddleware.matchEqualTeamValidation,
-  matchesController.updateMatchInProgress,
+  matchesController.updateStatusInProgress,
 );
 
 matchesRoute.patch('/:id/finish', matchesController.changeInProgress);
+
+matchesRoute.patch('/:id', matchesController.updateMatchInProgress);
 
 export default matchesRoute;

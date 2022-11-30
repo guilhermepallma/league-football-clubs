@@ -32,7 +32,6 @@ class loginService {
     const { password: _, ...userWithoutPassword } = userLogin.dataValues;
 
     const token = this.jwt.createToken(userWithoutPassword);
-    console.log(token);
 
     return { type: 200, message: { token } };
   };

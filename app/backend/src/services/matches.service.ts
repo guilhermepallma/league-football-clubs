@@ -23,24 +23,17 @@ class matchesService {
 
   getMatchByQuery = async (inProgress: boolean) => {
     const getMatchQuery = await Matches.findAll({
-      include: [
+      include:
         {
-          model: Teams,
-          as: 'teamHome',
+          all: true,
           attributes: { exclude: ['id'] },
         },
-        {
-          model: Teams,
-          as: 'teamAway',
-          attributes: { exclude: ['id'] },
-        },
-      ],
       where: { inProgress },
     });
     return { code: 200, result: getMatchQuery };
   };
 
-  updateMatchInProgress = async (match: Match, inProgress: boolean) => {
+  updateStatusInProgress = async (match: Match, inProgress: boolean) => {
     const getMatchQuery = await Matches.create({
       homeTeam: match.homeTeam,
       awayTeam: match.awayTeam,
@@ -56,5 +49,11 @@ class matchesService {
     await Matches.update({ inProgress }, { where: { id } });
     return { type: 200, message: { message: 'Finished' } };
   };
+
+  updateMatchInProgress = async (id: number, homeTeamGoals: number, awayTeamGoals: number) => {
+    await Matches.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    return { type: 200, message: { message: 'updated' } };
+  };
 }
+
 export default matchesService;

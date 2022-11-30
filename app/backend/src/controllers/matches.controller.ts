@@ -7,9 +7,17 @@ class macthesController {
   ) {}
 
   getAllTeamsInfo = async (req: Request, res: Response) => {
-    const { type, message } = await this.matchesService.getAllTeamsInfo();
+    const { inProgress } = req.query;
+    const { type, message } = await this.matchesService.getAllMatchInProgress();
 
-    return res.status(type).json(message);
+    if (!inProgress) {
+      return res.status(type).json(message);
+    }
+
+    const query = (inProgress === 'true');
+    const { code, result } = await this.matchesService.getMatchByQuery(query);
+
+    return res.status(code).json(result);
   };
 }
 

@@ -6,7 +6,7 @@ class validateToken {
     private jwt = new Authenticator(),
   ) {}
 
-  routersValidateToken = async (req: Request, res: Response, next: NextFunction) => {
+  routeValidateToken = async (req: Request, res: Response, next: NextFunction) => {
     const { authorization } = req.headers;
 
     if (!authorization) {

@@ -15,7 +15,7 @@ class authenticator {
       const verify = jwt.verify(token, process.env.JWT_SECRET as string);
       return { type: null, verify };
     } catch (error) {
-      return { type: 401, message: { message: 'Expired or invalid token' } };
+      return { type: 401, message: { message: 'Token must be a valid token' } };
     }
   };
 }

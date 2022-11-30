@@ -1,3 +1,4 @@
+import { Match } from '../interfaces/interfaces';
 import Teams from '../database/models/TeamsModel';
 import Matches from '../database/models/MatchesModel';
 
@@ -21,7 +22,7 @@ class matchesService {
   };
 
   getMatchByQuery = async (inProgress: boolean) => {
-    const getTeamsInfo = await Matches.findAll({
+    const getMatchQuery = await Matches.findAll({
       include: [
         {
           model: Teams,
@@ -36,7 +37,19 @@ class matchesService {
       ],
       where: { inProgress },
     });
-    return { code: 200, result: getTeamsInfo };
+    return { code: 200, result: getMatchQuery };
+  };
+
+  updateMatchInProgress = async (match: Match, inProgress: boolean) => {
+    const getMatchQuery = await Matches.create({
+      homeTeam: match.homeTeam,
+      awayTeam: match.awayTeam,
+      homeTeamGoals: match.homeTeamGoals,
+      awayTeamGoals: match.awayTeamGoals,
+      inProgress,
+    });
+
+    return { type: 201, message: getMatchQuery };
   };
 }
 export default matchesService;

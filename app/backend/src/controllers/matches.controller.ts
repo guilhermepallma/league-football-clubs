@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Match } from '../interfaces/interfaces';
 import MatchesService from '../services/matches.service';
 
-class macthesController {
+class matchesController {
   constructor(
     public matchesService = new MatchesService(),
   ) {}
@@ -43,4 +43,4 @@ class macthesController {
   };
 }
 
-export default macthesController;
+export default matchesController;

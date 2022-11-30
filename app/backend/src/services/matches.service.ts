@@ -51,5 +51,10 @@ class matchesService {
 
     return { type: 201, message: getMatchQuery };
   };
+
+  changeInProgress = async (inProgress: boolean, id: number) => {
+    await Matches.update({ inProgress }, { where: { id } });
+    return { type: 200, message: { message: 'Finished' } };
+  };
 }
 export default matchesService;

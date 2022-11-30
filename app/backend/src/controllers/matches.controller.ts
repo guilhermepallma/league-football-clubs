@@ -30,6 +30,17 @@ class macthesController {
 
     return res.status(type).json(message);
   };
+
+  changeInProgress = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { inProgress } = req.query;
+    const query = (inProgress === 'false');
+
+    const { type, message } = await this.matchesService
+      .changeInProgress(query as boolean, Number(id));
+
+    return res.status(type).json(message);
+  };
 }
 
 export default macthesController;

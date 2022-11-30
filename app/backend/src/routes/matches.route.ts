@@ -10,4 +10,6 @@ matchesRoute.get('/', matchesController.getMatchesInProgress);
 
 matchesRoute.post('/', authMiddleware.routeValidateToken, matchesController.updateMatchInProgress);
 
+matchesRoute.patch('/:id/finish', matchesController.changeInProgress);
+
 export default matchesRoute;

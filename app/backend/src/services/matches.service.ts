@@ -52,7 +52,7 @@ class matchesService {
 
   updateMatchInProgress = async (id: number, homeTeamGoals: number, awayTeamGoals: number) => {
     await Matches.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
-    return { type: 200, message: { message: 'updated' } };
+    return { type: 200, message: { message: 'Updated' } };
   };
 }
 

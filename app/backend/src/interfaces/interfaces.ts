@@ -18,7 +18,7 @@ interface MatchInfo {
   awayTeamGoals: number;
 }
 
-interface HomeResult {
+interface Result {
   name: string,
   totalVictories: number;
   totalDraws: number;
@@ -45,5 +45,5 @@ export {
   Match,
   MatchInfo,
   Leaderboard,
-  HomeResult,
+  Result,
 };

@@ -47,6 +47,27 @@ class tieBreaker {
     });
     return result;
   };
+
+  rulesTieBreakerAll = async (rank: Leaderboard[]) => {
+    const result = this.leaderboard.resultAwayTeam(rank);
+    result.sort((away, home) => {
+      let difference = home.totalPoints - away.totalPoints;
+      if (difference === 0) {
+        difference = home.totalVictories - away.totalVictories;
+        if (difference === 0) {
+          difference = home.goalsBalance - away.goalsBalance;
+          if (difference === 0) {
+            difference = home.goalsFavor - away.goalsFavor;
+            if (difference === 0) {
+              difference = home.goalsOwn - away.goalsOwn;
+            }
+          }
+        }
+      }
+      return difference;
+    });
+    return result;
+  };
 }
 
 export default tieBreaker;

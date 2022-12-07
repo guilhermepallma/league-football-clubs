@@ -24,6 +24,14 @@ class leaderboardController {
 
     return res.status(200).json(tieBreaker);
   };
+
+  sortAllTeam = async (req: Request, res: Response) => {
+    const filterTeam = await this.leaderboard.filterAllTeamInfo();
+    const result = this.leaderboard.resultAllTeam(filterTeam);
+    const tieBreaker = await this.tieBreaker.rulesTieBreakerAway(result);
+
+    return res.status(200).json(tieBreaker);
+  };
 }
 
 export default leaderboardController;

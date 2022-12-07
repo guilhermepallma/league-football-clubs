@@ -5,15 +5,21 @@ import Teams from '../database/models/TeamsModel';
 class leaderboardService {
   public result;
   public returnArray;
+  public returnAll;
   constructor() {
     this.result = [] as MatchInfo[];
     this.returnArray = [] as Result[];
+    this.returnAll = [] as Result[];
   }
 
   matchesFinished = async () => {
     const filter = await Matches.findAll({ raw: true, where: { inProgress: false } });
     return filter;
   };
+
+  //
+  // Home Team Rules
+  //
 
   filterHomeTeamInfo = async () => {
     const matches = await this.matchesFinished();
@@ -121,6 +127,67 @@ class leaderboardService {
         totalLosses: rulez.totalLosses,
         goalsFavor: rulez.goalsFavor,
         goalsOwn: rulez.goalsOwn,
+        goalsBalance: goalBalance,
+        efficiency: perfomaceTeam,
+      };
+    }); return rules;
+  };
+
+  //
+  // All Team Rules
+  //
+
+  rulesAllTeams = (matches: Matches[], teamsId: number) => {
+    const homeFilter = matches.filter((match) =>
+      match.homeTeam === teamsId);
+
+    const awayFilter = matches.filter((match) =>
+      match.awayTeam === teamsId);
+
+    const resultHome = this.rulesHomeTeam(homeFilter);
+    const resultAway = this.rulesAwayTeam(awayFilter);
+
+    return {
+      totalVictories: resultHome.totalVictories + resultAway.totalVictories,
+      totalDraws: resultHome.totalDraws + resultAway.totalDraws,
+      totalLosses: resultHome.totalLosses + resultAway.totalLosses,
+      goalsFavor: resultHome.goalsFavor + resultAway.goalsFavor,
+      goalsOwn: resultHome.goalsOwn + resultAway.goalsOwn,
+    };
+  };
+
+  filterAllTeamInfo = async () => {
+    const matches = await this.matchesFinished();
+    const teams = await Teams.findAll();
+    let arrayEmpty = [] as Result[];
+    teams.forEach((teamz) => {
+      const name = teamz.teamName;
+      const filterAllTeam = matches.filter((match) =>
+        match.awayTeam === teamz.id || match.homeTeam === teamz.id);
+      // Retorna retorna as condições da RulesAwayTeam dentro de um Array.
+      const all = this.rulesAllTeams(filterAllTeam, teamz.id);
+      this.returnAll.push({ name, ...all });
+      arrayEmpty = this.returnAll;
+    });
+    this.returnAll = [];
+    return arrayEmpty;
+  };
+
+  resultAllTeam = (allTeams: Result[]) => {
+    const rules = allTeams.map((rulz) => {
+      const totalPoints = (rulz.totalVictories * 3) + rulz.totalDraws;
+      const totalGames = rulz.totalVictories + rulz.totalLosses + rulz.totalDraws;
+      const perfomaceTeam = ((totalPoints / (totalGames * 3)) * 100).toFixed(2);
+      const goalBalance = rulz.goalsFavor - rulz.goalsOwn;
+      return {
+        name: rulz.name,
+        totalPoints,
+        totalGames,
+        totalVictories: rulz.totalVictories,
+        totalDraws: rulz.totalDraws,
+        totalLosses: rulz.totalLosses,
+        goalsFavor: rulz.goalsFavor,
+        goalsOwn: rulz.goalsOwn,
         goalsBalance: goalBalance,
         efficiency: perfomaceTeam,
       };

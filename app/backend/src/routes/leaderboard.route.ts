@@ -8,4 +8,6 @@ leaderboardRoute.get('/home', leaderboard.sortHomeTeam);
 
 leaderboardRoute.get('/away', leaderboard.sortAwayTeam);
 
+leaderboardRoute.get('/', leaderboard.sortAllTeam);
+
 export default leaderboardRoute;

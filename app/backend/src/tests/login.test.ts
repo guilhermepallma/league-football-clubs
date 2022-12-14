@@ -8,14 +8,12 @@ import App from '../app';
 const { app } = new App();
 const { expect } = chai;
 
-import { Response } from 'superagent';
 import user from './mocks/user.mock';
 import Users from '../database/models/UsersModel';
 
 chai.use(chaiHttp);
 
-describe('Route tests "/login"', () => {
-  let chaiHttpResponse: Response;
+describe('Testa rota de "/login"', () => {
 
   beforeEach(async () => {
     sinon

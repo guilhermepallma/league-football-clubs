@@ -1,0 +1,3 @@
+export default {
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkFkbWluIiwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20ifSwiaWF0IjoxNjcwOTk1NTIyLCJleHAiOjE2NzE2MDAzMjJ9.Y-0Qr_oW8e5s-SybPZI6y9U1NMYumw_Vcw0r0i2PAMs'
+}

@@ -4,10 +4,10 @@ module.exports = {
       'teams',
       [
         {
-          team_name: 'Avaí/Kindermann',
+          team_name: 'América-MG',
         },
         {
-          team_name: 'Bahia',
+          team_name: 'Athletico-PR',
         },
         {
           team_name: 'Botafogo',
@@ -19,7 +19,7 @@ module.exports = {
           team_name: 'Cruzeiro',
         },
         {
-          team_name: 'Ferroviária',
+          team_name: 'Coritiba',
         },
         {
           team_name: 'Flamengo',
@@ -31,22 +31,22 @@ module.exports = {
           team_name: 'Internacional',
         },
         {
-          team_name: 'Minas Brasília',
+          team_name: 'Cuiabá',
         },
         {
-          team_name: 'Napoli-SC',
+          team_name: 'Fortaleza',
         },
         {
           team_name: 'Palmeiras',
         },
         {
-          team_name: 'Real Brasília',
+          team_name: 'Goiás',
         },
         {
           team_name: 'Santos',
         },
         {
-          team_name: 'São José-SP',
+          team_name: 'Bragantino',
         },
         {
           team_name: 'São Paulo',
